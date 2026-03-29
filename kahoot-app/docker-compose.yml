@@ -1,0 +1,9 @@
+services:
+  kahoot:
+    build: .
+    container_name: kahoot-familiar
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    # Accesible desde cualquier dispositivo en la red local
+    # Desde la tablet: http://<IP_DE_TU_PI>:8080
