@@ -15,6 +15,12 @@ body{font-family:'Nunito',sans-serif;-webkit-tap-highlight-color:transparent;tou
 @keyframes jelly{0%,100%{transform:scale(1)}25%{transform:scale(1.08,.92)}50%{transform:scale(.96,1.04)}75%{transform:scale(1.04,.96)}}
 @keyframes confetti{0%{transform:translateY(-100vh) rotate(0);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
 @keyframes twinkle{0%,100%{opacity:.2;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
+@keyframes drift{0%{transform:translateX(0) translateY(0) rotate(0deg)}25%{transform:translateX(15px) translateY(-20px) rotate(5deg)}50%{transform:translateX(-10px) translateY(-40px) rotate(-3deg)}75%{transform:translateX(20px) translateY(-15px) rotate(4deg)}100%{transform:translateX(0) translateY(0) rotate(0deg)}}
+@keyframes rise{0%{transform:translateY(100vh) rotate(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
+@keyframes sway{0%,100%{transform:translateX(0) rotate(-5deg)}50%{transform:translateX(20px) rotate(5deg)}}
+@keyframes orbit{0%{transform:rotate(0deg) translateX(30px) rotate(0deg)}100%{transform:rotate(360deg) translateX(30px) rotate(-360deg)}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.3}50%{transform:scale(1.3);opacity:.7}}
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(0) rotate(0deg)}50%{opacity:1;transform:scale(1) rotate(180deg)}}
 .ct{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:16px;position:relative;transition:background .5s}
 .cd{backdrop-filter:blur(10px);border-radius:24px;padding:24px;width:100%;max-width:560px;position:relative;z-index:1}
 .bt{border:none;border-radius:50px;padding:14px 36px;font-size:18px;font-weight:800;font-family:'Fredoka',sans-serif;cursor:pointer;transition:transform .2s;display:inline-block}
@@ -178,8 +184,90 @@ function gT(){
 }
 
 function P(t){let d="";
-if(t==="hp"||t==="ss"){const c=t==="hp"?"#ffd700":"#fff";for(let i=0;i<20;i++)d+=`<div style="position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*3+1}px;height:${Math.random()*3+1}px;background:${c};border-radius:50%;opacity:${Math.random()*.6+.2};animation:twinkle ${Math.random()*3+2}s ease-in-out infinite;animation-delay:${Math.random()*3}s"></div>`;}
-else{for(let i=0;i<15;i++)d+=`<div style="position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*25+10}px;height:${Math.random()*25+10}px;background:rgba(255,255,255,.06);border-radius:50%;animation:float ${Math.random()*5+3}s ease-in-out infinite;animation-delay:${Math.random()*3}s"></div>`;}
+if(t==="hp"){
+  // Harry Potter: estrellas doradas centelleantes + rayos + snitches doradas
+  for(let i=0;i<25;i++)d+=`<div style="position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*3+1}px;height:${Math.random()*3+1}px;background:#ffd700;border-radius:50%;opacity:${Math.random()*.6+.2};animation:twinkle ${Math.random()*3+2}s ease-in-out infinite;animation-delay:${Math.random()*3}s"></div>`;
+  // Rayos ⚡ flotantes
+  for(let i=0;i<6;i++)d+=`<div style="position:absolute;left:${Math.random()*90+5}%;top:${Math.random()*90+5}%;font-size:${Math.random()*18+14}px;opacity:${Math.random()*.12+.04};animation:drift ${Math.random()*8+10}s ease-in-out infinite;animation-delay:${Math.random()*5}s">⚡</div>`;
+  // Snitches doradas
+  for(let i=0;i<4;i++)d+=`<div style="position:absolute;left:${Math.random()*80+10}%;top:${Math.random()*80+10}%;font-size:${Math.random()*10+12}px;opacity:${Math.random()*.1+.06};animation:orbit ${Math.random()*10+12}s linear infinite;animation-delay:${Math.random()*6}s">✦</div>`;
+  // Escudos de casas
+  const hpIcons=["🦁","🐍","🦅","🦡"];
+  for(let i=0;i<4;i++)d+=`<div style="position:absolute;left:${15+i*22}%;top:${Math.random()*60+20}%;font-size:28px;opacity:.06;animation:float ${Math.random()*5+6}s ease-in-out infinite;animation-delay:${i*1.5}s">${hpIcons[i]}</div>`;
+}else if(t==="sc"){
+  // Shin Chan: culos 🍑, crayones, Nevado, galletas chocobi
+  const scIcons=["🍑","🖍️","🐕","🍪","⭐","🎵","💛","🌸"];
+  for(let i=0;i<20;i++){const ic=scIcons[i%scIcons.length];d+=`<div style="position:absolute;left:${Math.random()*90+5}%;top:${Math.random()*90+5}%;font-size:${Math.random()*16+16}px;opacity:${Math.random()*.1+.08};animation:rise ${Math.random()*12+10}s linear infinite;animation-delay:${Math.random()*10}s">${ic}</div>`;}
+  // Nubes kawaii
+  for(let i=0;i<5;i++)d+=`<div style="position:absolute;left:${Math.random()*80+10}%;top:${Math.random()*40+5}%;width:${Math.random()*60+50}px;height:${Math.random()*20+18}px;background:rgba(255,182,193,.12);border-radius:50%;animation:sway ${Math.random()*8+8}s ease-in-out infinite;animation-delay:${Math.random()*4}s"></div>`;
+  // Patrones circulares pastel
+  for(let i=0;i<10;i++){const cols=["#ff6b9d","#45b7d1","#f7dc6f","#a8e6cf"];d+=`<div style="position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*30+20}px;height:${Math.random()*30+20}px;border:2px solid ${cols[i%4]};border-radius:50%;opacity:.07;animation:pulse ${Math.random()*4+3}s ease-in-out infinite;animation-delay:${Math.random()*3}s"></div>`;}
+}else if(t==="pk"){
+  // Pokémon: pokébolas, rayos, estrellas de batalla
+  const pkIcons=["🔴","⚡","⭐","✨","🔥","💧","🌿","🎯"];
+  for(let i=0;i<18;i++){const ic=pkIcons[i%pkIcons.length];d+=`<div style="position:absolute;left:${Math.random()*90+5}%;top:${Math.random()*90+5}%;font-size:${Math.random()*14+14}px;opacity:${Math.random()*.1+.05};animation:rise ${Math.random()*14+10}s linear infinite;animation-delay:${Math.random()*10}s">${ic}</div>`;}
+  // Pokébolas SVG circulares
+  for(let i=0;i<6;i++)d+=`<div style="position:absolute;left:${Math.random()*85+5}%;top:${Math.random()*85+5}%;width:${Math.random()*30+24}px;height:${Math.random()*30+24}px;border-radius:50%;border:2px solid rgba(231,76,60,.15);background:linear-gradient(180deg,rgba(231,76,60,.08) 48%,transparent 48%,transparent 52%,rgba(255,255,255,.08) 52%);animation:drift ${Math.random()*10+8}s ease-in-out infinite;animation-delay:${Math.random()*5}s"></div>`;
+  // Chispas de energía
+  for(let i=0;i<10;i++)d+=`<div style="position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*4+2}px;height:${Math.random()*4+2}px;background:#facc15;border-radius:50%;animation:sparkle ${Math.random()*3+2}s ease-in-out infinite;animation-delay:${Math.random()*4}s"></div>`;
+}else if(t==="mm"){
+  // My Melody & Kuromi: corazones, lazos, estrellas, notas musicales
+  const mmIcons=["🎀","💜","🐰","⭐","🌸","💖","🎵","☁️"];
+  for(let i=0;i<18;i++){const ic=mmIcons[i%mmIcons.length];d+=`<div style="position:absolute;left:${Math.random()*90+5}%;top:${Math.random()*90+5}%;font-size:${Math.random()*14+14}px;opacity:${Math.random()*.1+.05};animation:rise ${Math.random()*14+10}s linear infinite;animation-delay:${Math.random()*10}s">${ic}</div>`;}
+  // Corazones pulsantes
+  for(let i=0;i<8;i++){const cols=["#f472b6","#a78bfa","#f9a8d4","#c084fc"];d+=`<div style="position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${Math.random()*12+10}px;color:${cols[i%4]};opacity:.1;animation:pulse ${Math.random()*3+3}s ease-in-out infinite;animation-delay:${Math.random()*4}s">♥</div>`;}
+  // Estrellas brillantes
+  for(let i=0;i<12;i++)d+=`<div style="position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*3+2}px;height:${Math.random()*3+2}px;background:#f9a8d4;border-radius:50%;animation:twinkle ${Math.random()*3+2}s ease-in-out infinite;animation-delay:${Math.random()*4}s"></div>`;
+}else if(t==="mc"){
+  // Minecraft: bloques pixelados, picos, espadas, diamantes
+  const mcIcons=["⛏️","💎","🟩","🟫","🗡️","🧱","🌲","🐷"];
+  for(let i=0;i<16;i++){const ic=mcIcons[i%mcIcons.length];d+=`<div style="position:absolute;left:${Math.random()*90+5}%;top:${Math.random()*90+5}%;font-size:${Math.random()*14+14}px;opacity:${Math.random()*.08+.04};animation:drift ${Math.random()*12+10}s ease-in-out infinite;animation-delay:${Math.random()*8}s">${ic}</div>`;}
+  // Bloques cuadrados pixelados
+  for(let i=0;i<12;i++){const cols=["#4caf50","#795548","#8bc34a","#33691e"];d+=`<div style="position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*16+12}px;height:${Math.random()*16+12}px;background:${cols[i%4]};opacity:.06;border-radius:2px;animation:float ${Math.random()*6+4}s ease-in-out infinite;animation-delay:${Math.random()*4}s"></div>`;}
+}else if(t==="gh"){
+  // Studio Ghibli: hojas, bosque, espíritus, nubes
+  const ghIcons=["🍃","🌿","🌸","🍂","🌻","🌾","☁️","✨","🌙","🐾"];
+  for(let i=0;i<22;i++){const ic=ghIcons[i%ghIcons.length];d+=`<div style="position:absolute;left:${Math.random()*90+5}%;top:${Math.random()*90+5}%;font-size:${Math.random()*14+16}px;opacity:${Math.random()*.1+.06};animation:sway ${Math.random()*10+8}s ease-in-out infinite, rise ${Math.random()*18+14}s linear infinite;animation-delay:${Math.random()*8}s">${ic}</div>`;}
+  // Esporas de bosque
+  for(let i=0;i<15;i++)d+=`<div style="position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*6+3}px;height:${Math.random()*6+3}px;background:rgba(128,203,196,.2);border-radius:50%;animation:twinkle ${Math.random()*4+3}s ease-in-out infinite;animation-delay:${Math.random()*5}s"></div>`;
+}else if(t==="ma"){
+  // Matemáticas: números, operaciones, formas geométricas
+  const maIcons=["➕","➖","✖️","➗","🔢","📐","📏","🧮","∑","π"];
+  for(let i=0;i<18;i++){const ic=maIcons[i%maIcons.length];d+=`<div style="position:absolute;left:${Math.random()*90+5}%;top:${Math.random()*90+5}%;font-size:${Math.random()*14+14}px;opacity:${Math.random()*.08+.04};animation:drift ${Math.random()*12+8}s ease-in-out infinite;animation-delay:${Math.random()*6}s">${ic}</div>`;}
+  // Números flotantes
+  for(let i=0;i<10;i++){const num=Math.floor(Math.random()*10);d+=`<div style="position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${Math.random()*20+16}px;font-weight:900;font-family:'Fredoka';color:rgba(144,202,249,.12);animation:float ${Math.random()*6+4}s ease-in-out infinite;animation-delay:${Math.random()*4}s">${num}</div>`;}
+}else if(t==="le"){
+  // Lengua: letras, libros, plumas, palabras
+  const leIcons=["📝","📖","✏️","🔤","📚","✍️","💬","📜"];
+  for(let i=0;i<16;i++){const ic=leIcons[i%leIcons.length];d+=`<div style="position:absolute;left:${Math.random()*90+5}%;top:${Math.random()*90+5}%;font-size:${Math.random()*14+14}px;opacity:${Math.random()*.08+.04};animation:rise ${Math.random()*14+10}s linear infinite;animation-delay:${Math.random()*8}s">${ic}</div>`;}
+  // Letras del abecedario flotantes
+  const abc="ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz";
+  for(let i=0;i<12;i++){const ch=abc[Math.floor(Math.random()*abc.length)];d+=`<div style="position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${Math.random()*18+14}px;font-weight:900;font-family:'Cinzel Decorative',serif;color:rgba(255,204,128,.1);animation:sway ${Math.random()*8+6}s ease-in-out infinite;animation-delay:${Math.random()*5}s">${ch}</div>`;}
+}else if(t==="hi"){
+  // Historia: castillos, coronas, espadas, pergaminos
+  const hiIcons=["🏛️","⚔️","👑","📜","🏰","🗿","⏳","🎭","🛡️","⚱️"];
+  for(let i=0;i<18;i++){const ic=hiIcons[i%hiIcons.length];d+=`<div style="position:absolute;left:${Math.random()*90+5}%;top:${Math.random()*90+5}%;font-size:${Math.random()*14+16}px;opacity:${Math.random()*.08+.04};animation:drift ${Math.random()*14+10}s ease-in-out infinite;animation-delay:${Math.random()*8}s">${ic}</div>`;}
+  // Partículas de polvo antiguo
+  for(let i=0;i<12;i++)d+=`<div style="position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*4+2}px;height:${Math.random()*4+2}px;background:rgba(215,204,200,.15);border-radius:50%;animation:twinkle ${Math.random()*5+3}s ease-in-out infinite;animation-delay:${Math.random()*4}s"></div>`;
+}else if(t==="ge"){
+  // Geografía: globos, mapas, brújulas, montañas
+  const geIcons=["🌍","🌎","🌏","🗺️","🧭","🏔️","🌋","🏝️","🗽","🎌"];
+  for(let i=0;i<18;i++){const ic=geIcons[i%geIcons.length];d+=`<div style="position:absolute;left:${Math.random()*90+5}%;top:${Math.random()*90+5}%;font-size:${Math.random()*14+16}px;opacity:${Math.random()*.08+.04};animation:drift ${Math.random()*12+10}s ease-in-out infinite;animation-delay:${Math.random()*8}s">${ic}</div>`;}
+  // Líneas de meridianos/paralelos
+  for(let i=0;i<6;i++)d+=`<div style="position:absolute;left:${i*18+5}%;top:0;width:1px;height:100%;background:rgba(128,203,196,.04);animation:pulse ${Math.random()*6+4}s ease-in-out infinite;animation-delay:${i}s"></div>`;
+  for(let i=0;i<4;i++)d+=`<div style="position:absolute;left:0;top:${i*25+10}%;width:100%;height:1px;background:rgba(128,203,196,.04);animation:pulse ${Math.random()*6+4}s ease-in-out infinite;animation-delay:${i*1.5}s"></div>`;
+}else if(t==="ss"){
+  // Sistema Solar: planetas, estrellas, cohetes, constelaciones
+  for(let i=0;i<30;i++)d+=`<div style="position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*3+1}px;height:${Math.random()*3+1}px;background:#fff;border-radius:50%;opacity:${Math.random()*.6+.2};animation:twinkle ${Math.random()*3+2}s ease-in-out infinite;animation-delay:${Math.random()*3}s"></div>`;
+  const ssIcons=["🪐","🚀","🌙","☄️","🛸","🌟","💫","🔭"];
+  for(let i=0;i<12;i++){const ic=ssIcons[i%ssIcons.length];d+=`<div style="position:absolute;left:${Math.random()*90+5}%;top:${Math.random()*90+5}%;font-size:${Math.random()*14+14}px;opacity:${Math.random()*.08+.04};animation:orbit ${Math.random()*20+15}s linear infinite;animation-delay:${Math.random()*10}s">${ic}</div>`;}
+  // Nebulosas de color
+  for(let i=0;i<4;i++){const cols=["rgba(179,157,219,.06)","rgba(77,208,225,.04)","rgba(255,213,79,.04)","rgba(92,107,192,.06)"];d+=`<div style="position:absolute;left:${Math.random()*80}%;top:${Math.random()*80}%;width:${Math.random()*120+80}px;height:${Math.random()*120+80}px;background:radial-gradient(circle,${cols[i]},transparent 70%);border-radius:50%;animation:drift ${Math.random()*20+15}s ease-in-out infinite;animation-delay:${Math.random()*8}s"></div>`;}
+}else{
+  // Default/menu: partículas genéricas coloridas
+  const defIcons=["🎮","🎲","⭐","🎯","🏆","🌟","💎","🔥","🚀","🎪"];
+  for(let i=0;i<12;i++){const ic=defIcons[i%defIcons.length];d+=`<div style="position:absolute;left:${Math.random()*90+5}%;top:${Math.random()*90+5}%;font-size:${Math.random()*14+14}px;opacity:${Math.random()*.06+.03};animation:rise ${Math.random()*14+10}s linear infinite;animation-delay:${Math.random()*10}s">${ic}</div>`;}
+  for(let i=0;i<15;i++)d+=`<div style="position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*25+10}px;height:${Math.random()*25+10}px;background:rgba(255,255,255,.06);border-radius:50%;animation:float ${Math.random()*5+3}s ease-in-out infinite;animation-delay:${Math.random()*3}s"></div>`;}
 return `<div class="pp">${d}</div>`;}
 
 function R(){
